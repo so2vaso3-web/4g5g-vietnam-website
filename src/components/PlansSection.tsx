@@ -285,6 +285,7 @@ export default function PlansSection() {
       {/* Alert Modal */}
       {alertModal.isOpen && (
         <AlertModal
+          isOpen={alertModal.isOpen}
           message={alertModal.message}
           type={alertModal.type}
           onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
