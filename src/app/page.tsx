@@ -18,7 +18,7 @@ import VisitorTracker from '@/components/VisitorTracker';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-900 text-gray-100" style={{ backgroundColor: '#0f172a', background: '#0f172a', color: '#f1f5f9' }}>
+    <main className="min-h-screen bg-white text-gray-900">
       <VisitorTracker />
       {/* WelcomeBanner tạm thời tắt để web có nền trắng */}
       {/* <WelcomeBanner /> */}
