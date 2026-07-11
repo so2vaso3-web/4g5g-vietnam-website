@@ -1,0 +1,612 @@
+[
+  {
+    "id": "msg-1763239758511",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "a",
+    "email": "so2vaso3@gmail.com",
+    "message": "dd",
+    "timestamp": "2025-11-15T20:49:18.511Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "reply-1763239763053",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Admin",
+    "email": "",
+    "message": "aa",
+    "timestamp": "2025-11-15T20:49:23.053Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "welcome-1763239880520",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Support Team",
+    "email": "",
+    "message": "👋 Hello! Welcome to our support chat. We're here to help you with any questions or concerns. How can we assist you today?",
+    "timestamp": "2025-11-15T20:51:20.520Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763239893752",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "ee",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "ád",
+    "timestamp": "2025-11-15T20:51:33.752Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763240065688",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "w",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "ww",
+    "timestamp": "2025-11-15T20:54:25.688Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763240075076",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "w",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "wwwwww",
+    "timestamp": "2025-11-15T20:54:35.076Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763242679871",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "ê",
+    "email": "so2vaso3@gmail.com",
+    "message": "ww",
+    "timestamp": "2025-11-15T21:37:59.871Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "reply-1763243075611",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Admin",
+    "email": "",
+    "message": "ê",
+    "timestamp": "2025-11-15T21:44:35.611Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763243638183",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "e",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "sd",
+    "timestamp": "2025-11-15T21:53:58.183Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763243639455",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "e",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "sđ",
+    "timestamp": "2025-11-15T21:53:59.455Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763243640015",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "e",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "sd",
+    "timestamp": "2025-11-15T21:54:00.015Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763243640535",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "e",
+    "email": "cuutil@dxddk.capcut13.name.ng",
+    "message": "ds",
+    "timestamp": "2025-11-15T21:54:00.535Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "reply-1763243650051",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Admin",
+    "email": "",
+    "message": "cc",
+    "timestamp": "2025-11-15T21:54:10.051Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763243795757",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "ee",
+    "email": "so2vaso3@gmail.com",
+    "message": "ê",
+    "timestamp": "2025-11-15T21:56:35.757Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763256931497",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "quy",
+    "email": "á@gmail.com",
+    "message": "sadf",
+    "timestamp": "2025-11-16T01:35:31.497Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763256932500-reply",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Support Team",
+    "email": "",
+    "message": "Thank you for your message! Our support team will respond as soon as possible.",
+    "timestamp": "2025-11-16T01:35:32.500Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763256933174",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "quy",
+    "email": "á@gmail.com",
+    "message": "ê",
+    "timestamp": "2025-11-16T01:35:33.174Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763256934176-reply",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Support Team",
+    "email": "",
+    "message": "Thank you for your message! Our support team will respond as soon as possible.",
+    "timestamp": "2025-11-16T01:35:34.176Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763256934969",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "quy",
+    "email": "á@gmail.com",
+    "message": "ee",
+    "timestamp": "2025-11-16T01:35:34.969Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763256935971-reply",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Support Team",
+    "email": "",
+    "message": "Thank you for your message! Our support team will respond as soon as possible.",
+    "timestamp": "2025-11-16T01:35:35.971Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763375355143",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "ee",
+    "timestamp": "2025-11-17T10:29:15.143Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763375356861",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "eee",
+    "timestamp": "2025-11-17T10:29:16.861Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763378690767",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "wwwwwwwwww",
+    "timestamp": "2025-11-17T11:24:50.767Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763378691871",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "www",
+    "timestamp": "2025-11-17T11:24:51.871Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763378692759",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "w",
+    "timestamp": "2025-11-17T11:24:52.759Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763378693615",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "w",
+    "timestamp": "2025-11-17T11:24:53.615Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763378701539",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "cc",
+    "timestamp": "2025-11-17T11:25:01.539Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763382323541",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "ê",
+    "timestamp": "2025-11-17T12:25:23.541Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763382324267",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "ê",
+    "timestamp": "2025-11-17T12:25:24.267Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763400648569",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Khách hàng",
+    "email": "",
+    "message": "r",
+    "timestamp": "2025-11-17T17:30:48.569Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "reply-1763402344506",
+    "visitorId": "visitor-1763093469182-ui2lzknv2",
+    "name": "Admin",
+    "email": "",
+    "message": "da",
+    "timestamp": "2025-11-17T17:59:04.506Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "welcome-visitor-1763453843724-wcue33ciz",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Hỗ Trợ",
+    "email": "",
+    "message": "👋 Xin chào! Chào mừng bạn đến với chat hỗ trợ. Chúng tôi sẵn sàng giúp đỡ bạn với mọi câu hỏi. Bạn cần hỗ trợ gì?",
+    "timestamp": "2025-11-18T08:25:19.052Z",
+    "isAdmin": true,
+    "read": true
+  },
+  {
+    "id": "msg-1763455489248-ezfb1venr",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sadsd",
+    "timestamp": "2025-11-18T08:44:49.248Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455496030-ia3ir8x0w",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sdasds",
+    "timestamp": "2025-11-18T08:44:56.030Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455497219-d7ttkhgyz",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "saddsa",
+    "timestamp": "2025-11-18T08:44:57.219Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455565667-tp65m1nvy",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sdafsa",
+    "timestamp": "2025-11-18T08:46:05.667Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455567083-yf9p3si6v",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ádfsda",
+    "timestamp": "2025-11-18T08:46:07.083Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455568011-xmuqann8t",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ádf",
+    "timestamp": "2025-11-18T08:46:08.011Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455578757-gyjjlbh3z",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sadf",
+    "timestamp": "2025-11-18T08:46:18.757Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455579709-ivabn1i0y",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ádfsa",
+    "timestamp": "2025-11-18T08:46:19.709Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763455580421-tk6sl86tn",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ádf",
+    "timestamp": "2025-11-18T08:46:20.421Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457187217-v8q5xquqt",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sdaf",
+    "timestamp": "2025-11-18T09:13:07.217Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457188945-v4irjwsz4",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ádsdsasdadas",
+    "timestamp": "2025-11-18T09:13:08.945Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457190009-ec51xqk6z",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "áddsa",
+    "timestamp": "2025-11-18T09:13:10.009Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457191648-jh6e64t5t",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sadddddddđ",
+    "timestamp": "2025-11-18T09:13:11.648Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457224943-0zz2autzc",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sadf",
+    "timestamp": "2025-11-18T09:13:44.943Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457378463-vcd98pw2w",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "da",
+    "timestamp": "2025-11-18T09:16:18.463Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "reply-1763457387475",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Admin",
+    "email": "",
+    "message": "da",
+    "timestamp": "2025-11-18T09:16:27.475Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "reply-1763457388067",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Admin",
+    "email": "",
+    "message": "da",
+    "timestamp": "2025-11-18T09:16:28.067Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "reply-1763457388667",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Admin",
+    "email": "",
+    "message": "eaw",
+    "timestamp": "2025-11-18T09:16:28.667Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "msg-1763457491834-gszjpckud",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sdf",
+    "timestamp": "2025-11-18T09:18:11.834Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763457574070-umdbrc6hz",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ádf",
+    "timestamp": "2025-11-18T09:19:34.070Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763459159266-3nax8ux26",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sad",
+    "timestamp": "2025-11-18T09:45:59.266Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763459163105-sgtb4yfmy",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sfda",
+    "timestamp": "2025-11-18T09:46:03.105Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763459167429-z9kmei6m9",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "eeeee",
+    "timestamp": "2025-11-18T09:46:07.429Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763459171723-ex7rxnfg5",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "sadf",
+    "timestamp": "2025-11-18T09:46:11.723Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763459252901-bkczb7b0l",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "ee",
+    "timestamp": "2025-11-18T09:47:32.901Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "msg-1763459256195-qdxa5d3af",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Bạn",
+    "email": "",
+    "message": "fsadd",
+    "timestamp": "2025-11-18T09:47:36.195Z",
+    "isAdmin": false,
+    "read": true
+  },
+  {
+    "id": "reply-1763459269093",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Admin",
+    "email": "",
+    "message": "dsasfda",
+    "timestamp": "2025-11-18T09:47:49.093Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "reply-1763459270790",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Admin",
+    "email": "",
+    "message": "sfddđ",
+    "timestamp": "2025-11-18T09:47:50.790Z",
+    "isAdmin": true,
+    "read": false
+  },
+  {
+    "id": "reply-1763459272509",
+    "visitorId": "visitor-1763453843724-wcue33ciz",
+    "name": "Admin",
+    "email": "",
+    "message": "sdfaaaaaaaaaa",
+    "timestamp": "2025-11-18T09:47:52.509Z",
+    "isAdmin": true,
+    "read": false
+  }
+]

@@ -1,0 +1,646 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import AlertModal from '@/components/AlertModal';
+
+export default function AdminDashboard() {
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: '', type: 'info' as 'info' | 'success' | 'warning' | 'error' });
+  const [stats, setStats] = useState({
+    totalPackages: 0,
+    totalOrders: 0,
+    pendingOrders: 0,
+    completedOrders: 0,
+    cancelledOrders: 0,
+    totalRevenue: 0,
+    monthlyRevenue: 0,
+    momoOrders: 0,
+    zalopayOrders: 0,
+    totalVisits: 0,
+    uniqueVisitors: 0,
+    todayVisits: 0,
+    unreadMessages: 0,
+  });
+  const [orders, setOrders] = useState<any[]>([]);
+  const [packages, setPackages] = useState<any[]>([]);
+
+  const loadStats = async () => {
+    if (typeof window !== 'undefined') {
+      let packages: any[] = [];
+      let orders: any[] = [];
+      
+      // Fetch từ API thay vì đọc trực tiếp từ localStorage để đảm bảo đồng bộ
+      try {
+        const packagesResponse = await fetch('/api/packages');
+        if (packagesResponse.ok) {
+          const packagesData = await packagesResponse.json();
+          packages = Array.isArray(packagesData.packages) ? packagesData.packages : [];
+          // Đồng bộ với localStorage để cache
+          localStorage.setItem('packages', JSON.stringify(packages));
+        } else {
+          // Fallback to localStorage nếu API lỗi
+          const packagesData = localStorage.getItem('packages');
+          if (packagesData) {
+            const parsed = JSON.parse(packagesData);
+            packages = Array.isArray(parsed) ? parsed : [];
+          }
+        }
+      } catch (e) {
+        console.error('Error loading packages from API:', e);
+        // Fallback to localStorage
+        try {
+          const packagesData = localStorage.getItem('packages');
+          if (packagesData) {
+            const parsed = JSON.parse(packagesData);
+            packages = Array.isArray(parsed) ? parsed : [];
+          }
+        } catch (parseError) {
+          console.error('Error parsing packages:', parseError);
+          packages = [];
+        }
+      }
+      
+      try {
+        const ordersResponse = await fetch('/api/orders');
+        if (ordersResponse.ok) {
+          const ordersData = await ordersResponse.json();
+          orders = Array.isArray(ordersData.orders) ? ordersData.orders : [];
+          // Đồng bộ với localStorage để cache
+          localStorage.setItem('orders', JSON.stringify(orders));
+        } else {
+          // Fallback to localStorage nếu API lỗi
+          const ordersData = localStorage.getItem('orders');
+          if (ordersData) {
+            const parsed = JSON.parse(ordersData);
+            orders = Array.isArray(parsed) ? parsed : [];
+          }
+        }
+      } catch (e) {
+        console.error('Error loading orders from API:', e);
+        // Fallback to localStorage
+        try {
+          const ordersData = localStorage.getItem('orders');
+          if (ordersData) {
+            const parsed = JSON.parse(ordersData);
+            orders = Array.isArray(parsed) ? parsed : [];
+          }
+        } catch (parseError) {
+          console.error('Error parsing orders:', parseError);
+          orders = [];
+        }
+      }
+
+      // Lưu vào state để dùng lại
+      setOrders(orders);
+      setPackages(packages);
+
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+      const monthlyOrders = orders.filter((o: any) => {
+        const orderDate = new Date(o.createdAt);
+        return orderDate.getMonth() === currentMonth && orderDate.getFullYear() === currentYear && o.status === 'completed';
+      });
+
+      const completedOrders = orders.filter((o: any) => o.status === 'completed');
+      const totalRevenue = completedOrders.reduce((sum: number, o: any) => sum + (o.amount || o.price || 0), 0);
+      const monthlyRevenue = monthlyOrders.reduce((sum: number, o: any) => sum + (o.amount || o.price || 0), 0);
+
+      // Load visitor stats
+      let visits: any[] = [];
+      let uniqueVisitors: any[] = [];
+      let chatMessages: any[] = [];
+      
+      try {
+        const visitsData = localStorage.getItem('visitorStats');
+        if (visitsData) {
+          const parsed = JSON.parse(visitsData);
+          visits = Array.isArray(parsed) ? parsed : [];
+        }
+      } catch (e) {
+        visits = [];
+      }
+      
+      try {
+        const uniqueVisitorsData = localStorage.getItem('uniqueVisitors');
+        if (uniqueVisitorsData) {
+          const parsed = JSON.parse(uniqueVisitorsData);
+          uniqueVisitors = Array.isArray(parsed) ? parsed : [];
+        }
+      } catch (e) {
+        uniqueVisitors = [];
+      }
+      
+      const today = new Date().toISOString().split('T')[0];
+      const todayVisits = visits.filter((v: any) => v && v.date === today).length;
+
+      // Load chat messages
+      try {
+        const chatMessagesData = localStorage.getItem('chatMessages');
+        if (chatMessagesData) {
+          const parsed = JSON.parse(chatMessagesData);
+          chatMessages = Array.isArray(parsed) ? parsed : [];
+        }
+      } catch (e) {
+        chatMessages = [];
+      }
+      
+      const unreadMessages = chatMessages.filter((m: any) => m && !m.read && !m.isAdmin).length;
+
+      setStats({
+        totalPackages: packages.length || 0,
+        totalOrders: orders.length || 0,
+        pendingOrders: orders.filter((o: any) => o.status === 'pending').length || 0,
+        completedOrders: completedOrders.length || 0,
+        cancelledOrders: orders.filter((o: any) => o.status === 'cancelled').length || 0,
+        totalRevenue,
+        monthlyRevenue,
+        momoOrders: orders.filter((o: any) => o.paymentMethod === 'momo').length || 0,
+        zalopayOrders: orders.filter((o: any) => o.paymentMethod === 'zalopay').length || 0,
+        totalVisits: visits.length || 0,
+        uniqueVisitors: uniqueVisitors.length || 0,
+        todayVisits: todayVisits || 0,
+        unreadMessages: unreadMessages || 0,
+      });
+    }
+  };
+
+  useEffect(() => {
+    // Load stats ngay khi component mount
+    loadStats().catch(console.error);
+    
+    // Refresh mỗi 5 giây để đồng bộ dữ liệu từ server (giảm từ 10s xuống 5s để cập nhật nhanh hơn)
+    const interval = setInterval(() => {
+      loadStats().catch(console.error);
+    }, 5000);
+    
+    // Lắng nghe event khi có đơn hàng mới được tạo
+    const handleOrdersUpdated = () => {
+      loadStats().catch(console.error);
+    };
+    
+    if (typeof window !== 'undefined') {
+      window.addEventListener('ordersUpdated', handleOrdersUpdated);
+    }
+    
+    return () => {
+      clearInterval(interval);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('ordersUpdated', handleOrdersUpdated);
+      }
+    };
+  }, []);
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('vi-VN', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const calculateGrowth = (current: number, previous: number): string => {
+    if (previous === 0) return current > 0 ? '100.0' : '0.0';
+    return ((current - previous) / previous * 100).toFixed(1);
+  };
+
+  const getPreviousMonthRevenue = () => {
+    // Sử dụng orders từ state (đã được load từ API)
+    if (typeof window !== 'undefined') {
+      let orders: any[] = [];
+      try {
+        // Thử lấy từ localStorage (đã được sync từ API)
+        const ordersData = localStorage.getItem('orders');
+        if (ordersData) {
+          const parsed = JSON.parse(ordersData);
+          orders = Array.isArray(parsed) ? parsed : [];
+        }
+      } catch (e) {
+        orders = [];
+      }
+      const now = new Date();
+      const previousMonth = now.getMonth() === 0 ? 11 : now.getMonth() - 1;
+      const previousYear = now.getMonth() === 0 ? now.getFullYear() - 1 : now.getFullYear();
+      
+      const previousMonthOrders = (Array.isArray(orders) ? orders : []).filter((o: any) => {
+        const orderDate = new Date(o.createdAt);
+        return orderDate.getMonth() === previousMonth && 
+               orderDate.getFullYear() === previousYear && 
+               o.status === 'completed';
+      });
+      
+      return previousMonthOrders.reduce((sum: number, o: any) => sum + (o.amount || o.price || 0), 0);
+    }
+    return 0;
+  };
+
+  const previousMonthRevenue = getPreviousMonthRevenue();
+  const revenueGrowth = calculateGrowth(stats.monthlyRevenue, previousMonthRevenue);
+
+  return (
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
+        <div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 bg-gradient-to-r from-red-600 to-blue-600 bg-clip-text text-transparent">
+            Bảng Điều Khiển
+          </h2>
+          <p className="text-gray-400 text-xs sm:text-sm">Tổng quan về website và đơn hàng</p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+          <button
+            onClick={() => {
+              const data = {
+                packages: JSON.parse(localStorage.getItem('packages') || '[]'),
+                orders: JSON.parse(localStorage.getItem('orders') || '[]'),
+                settings: JSON.parse(localStorage.getItem('adminSettings') || '{}'),
+                content: JSON.parse(localStorage.getItem('websiteContent') || '{}'),
+                exportedAt: new Date().toISOString(),
+              };
+              const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `backup-${new Date().toISOString().split('T')[0]}.json`;
+              a.click();
+              URL.revokeObjectURL(url);
+              setAlertModal({ isOpen: true, message: 'Đã xuất backup thành công!', type: 'success' });
+            }}
+            className="px-3 sm:px-4 py-2 bg-green-600 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base min-h-[44px] w-full sm:w-auto"
+          >
+            <i className="fas fa-download"></i>
+            <span>Xuất Backup</span>
+          </button>
+          <button
+            onClick={() => {
+              const input = document.createElement('input');
+              input.type = 'file';
+              input.accept = '.json';
+              input.onchange = (e) => {
+                const file = (e.target as HTMLInputElement).files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    try {
+                      if (!event.target?.result) return;
+                      const data = JSON.parse(event.target.result as string);
+                      if (data.packages) localStorage.setItem('packages', JSON.stringify(data.packages));
+                      if (data.orders) localStorage.setItem('orders', JSON.stringify(data.orders));
+                      if (data.settings) localStorage.setItem('adminSettings', JSON.stringify(data.settings));
+                      if (data.content) localStorage.setItem('websiteContent', JSON.stringify(data.content));
+                      setAlertModal({ isOpen: true, message: 'Đã khôi phục backup thành công! Vui lòng refresh trang.', type: 'success' });
+                      setTimeout(() => window.location.reload(), 1500);
+                    } catch (err) {
+                      setAlertModal({ isOpen: true, message: 'Lỗi: File backup không hợp lệ!', type: 'error' });
+                    }
+                  };
+                  reader.readAsText(file);
+                }
+              };
+              input.click();
+            }}
+            className="px-3 sm:px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base min-h-[44px] w-full sm:w-auto"
+          >
+            <i className="fas fa-upload"></i>
+            <span>Khôi Phục Backup</span>
+          </button>
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-blue-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-blue-500/30 flex items-center justify-center group-hover:bg-blue-500/50 transition-colors">
+              <i className="fas fa-box text-blue-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.totalPackages}</span>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Tổng Gói Cước</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">Hiện có trong hệ thống</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-purple-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-purple-500/30 flex items-center justify-center group-hover:bg-purple-500/50 transition-colors">
+              <i className="fas fa-shopping-cart text-purple-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.totalOrders}</span>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Tổng Đơn Hàng</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">Tất cả các đơn hàng</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 border border-yellow-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-yellow-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-yellow-500/30 flex items-center justify-center group-hover:bg-yellow-500/50 transition-colors">
+              <i className="fas fa-clock text-yellow-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.pendingOrders}</span>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Đơn Chờ Xử Lý</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">Cần xử lý ngay</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-green-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-green-500/30 flex items-center justify-center group-hover:bg-green-500/50 transition-colors">
+              <i className="fas fa-check-circle text-green-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.completedOrders}</span>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Đơn Hoàn Thành</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">{stats.totalOrders > 0 ? ((stats.completedOrders / stats.totalOrders) * 100).toFixed(1) : 0}% tổng đơn</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <div className="bg-gradient-to-br from-indigo-500/20 to-indigo-600/20 border border-indigo-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-indigo-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-indigo-500/30 flex items-center justify-center group-hover:bg-indigo-500/50 transition-colors">
+              <i className="fas fa-users text-indigo-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <div className="text-right">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-white block">{stats.uniqueVisitors}</span>
+              <span className="text-[10px] sm:text-xs text-gray-400">unique</span>
+            </div>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Lượt Truy Cập</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">{stats.todayVisits} hôm nay | {stats.totalVisits} tổng</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/50 transition-colors">
+              <i className="fas fa-envelope-open text-cyan-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <div className="text-right">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-white block">{stats.unreadMessages}</span>
+            </div>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Tin Nhắn Chưa Đọc</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">Cần phản hồi</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-red-500/20 to-red-600/20 border border-red-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-red-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-red-500/30 flex items-center justify-center group-hover:bg-red-500/50 transition-colors">
+              <i className="fas fa-times-circle text-red-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <span className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.cancelledOrders}</span>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Đơn Đã Hủy</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">Không thành công</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 border border-emerald-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-emerald-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-emerald-500/30 flex items-center justify-center group-hover:bg-emerald-500/50 transition-colors">
+              <i className="fas fa-dollar-sign text-emerald-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <div className="text-right">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-white block">{formatCurrency(stats.totalRevenue)}</span>
+            </div>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Tổng Doanh Thu</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">Tất cả thời gian</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 border border-cyan-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-cyan-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/50 transition-colors">
+              <i className="fas fa-calendar-alt text-cyan-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <div className="text-right">
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-white block">{formatCurrency(stats.monthlyRevenue)}</span>
+              {revenueGrowth !== '0.0' && (
+                <span className={`text-[10px] sm:text-xs font-semibold ${parseFloat(revenueGrowth) > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {parseFloat(revenueGrowth) > 0 ? '↑' : '↓'} {Math.abs(parseFloat(revenueGrowth))}%
+                </span>
+              )}
+            </div>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Doanh Thu Tháng Này</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">So với tháng trước</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-pink-500/20 to-pink-600/20 border border-pink-500/30 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 hover:border-pink-400/50 transition-all duration-300 hover:scale-105 group">
+          <div className="flex items-center justify-between mb-2 sm:mb-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-lg bg-pink-500/30 flex items-center justify-center group-hover:bg-pink-500/50 transition-colors">
+              <i className="fas fa-credit-card text-pink-400 text-sm sm:text-base md:text-xl"></i>
+            </div>
+            <div className="text-right">
+              <div className="text-sm font-bold text-white">
+                <div className="flex items-center gap-2 justify-end mb-1">
+                  <span className="bg-pink-500/30 px-2 py-1 rounded text-[10px] sm:text-xs">{stats.momoOrders}</span>
+                  <span className="text-gray-400">MoMo</span>
+                </div>
+                <div className="flex items-center gap-2 justify-end">
+                  <span className="bg-green-500/30 px-2 py-1 rounded text-[10px] sm:text-xs">{stats.zalopayOrders}</span>
+                  <span className="text-gray-400">ZaloPay</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-gray-400 text-xs sm:text-sm mb-0.5 sm:mb-1">Phương Thức Thanh Toán</p>
+          <p className="text-gray-500 text-[10px] sm:text-xs">MoMo & ZaloPay</p>
+        </div>
+      </div>
+
+      <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 mb-6 shadow-xl">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold flex items-center gap-2">
+            <i className="fas fa-history text-blue-400"></i>
+            <span>Đơn Hàng Gần Đây</span>
+          </h3>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              const ordersTab = document.querySelector('[data-tab="orders"]');
+              if (ordersTab) (ordersTab as HTMLElement).click();
+            }}
+            className="text-blue-400 hover:text-blue-300 text-sm flex items-center gap-1"
+          >
+            <span>Xem tất cả</span>
+            <i className="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <table className="w-full border-collapse min-w-full">
+            <thead>
+              <tr className="border-b border-white/10">
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Mã Đơn</th>
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Khách Hàng</th>
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Gói Cước</th>
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Giá</th>
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Thanh Toán</th>
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Trạng Thái</th>
+                <th className="text-left p-2 sm:p-3 text-[10px] sm:text-xs sm:text-sm font-semibold text-gray-300 whitespace-nowrap">Ngày</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(() => {
+                // Sử dụng orders từ state (đã được load từ API và sync với localStorage)
+                let recentOrders: any[] = [];
+                try {
+                  // Lấy từ localStorage (đã được sync từ API trong loadStats)
+                  const ordersData = localStorage.getItem('orders');
+                  if (ordersData) {
+                    const parsed = JSON.parse(ordersData);
+                    recentOrders = Array.isArray(parsed) ? parsed : [];
+                  }
+                } catch (e) {
+                  recentOrders = [];
+                }
+                recentOrders = recentOrders
+                  .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                  .slice(0, 5);
+                return recentOrders.length === 0 ? (
+                  <tr>
+                    <td colSpan={7} className="text-center py-12 text-gray-400">
+                      <i className="fas fa-inbox text-4xl mb-2 sm:mb-3 opacity-50"></i>
+                      <p>Chưa có đơn hàng nào</p>
+                    </td>
+                  </tr>
+                ) : (
+                  (Array.isArray(recentOrders) ? recentOrders : []).map((order: any) => (
+                    <tr key={order.id || order.orderId} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                      <td className="p-3 text-gray-300 font-mono text-[10px] sm:text-xs">{order.id || order.orderId}</td>
+                      <td className="p-3 text-sm">
+                        <div className="font-medium">{order.customerName || order.name || 'N/A'}</div>
+                        <div className="text-[10px] sm:text-xs text-gray-500">{order.customerEmail || order.email || ''}</div>
+                      </td>
+                      <td className="p-3 text-sm">
+                        <div className="font-medium">{order.packageName || order.planName}</div>
+                        <div className="text-[10px] sm:text-xs text-gray-500 capitalize">{order.carrier}</div>
+                      </td>
+                      <td className="p-3 font-semibold text-white">{formatCurrency(order.amount || order.price || 0)}</td>
+                      <td className="p-3">
+                        <span className={`px-2 py-1 rounded text-[10px] sm:text-xs font-semibold ${
+                          order.paymentMethod === 'momo'
+                            ? 'bg-pink-500/20 text-pink-400'
+                            : order.paymentMethod === 'bank'
+                            ? 'bg-green-500/20 text-green-400'
+                            : 'bg-blue-500/20 text-blue-400'
+                        }`}>
+                          {order.paymentMethod === 'momo' ? 'MoMo' : order.paymentMethod === 'bank' ? 'Chuyển Khoản' : 'ZaloPay'}
+                        </span>
+                      </td>
+                      <td className="p-3">
+                        <span className={`px-2 py-1 rounded text-[10px] sm:text-xs font-semibold ${
+                          order.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30' :
+                          order.status === 'completed' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                          'bg-red-500/20 text-red-400 border border-red-500/30'
+                        }`}>
+                          {order.status === 'pending' ? 'Chờ Xử Lý' : order.status === 'completed' ? 'Hoàn Thành' : 'Đã Hủy'}
+                        </span>
+                      </td>
+                      <td className="p-3 text-gray-400 text-[10px] sm:text-xs">{formatDate(order.createdAt)}</td>
+                    </tr>
+                  ))
+                );
+              })()}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-xl">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <i className="fas fa-bolt text-yellow-400"></i>
+            <span>Thao Tác Nhanh</span>
+          </h3>
+          <div className="space-y-3">
+            <button
+              onClick={() => {
+                const ordersTab = document.querySelector('[data-tab="packages"]');
+                if (ordersTab) (ordersTab as HTMLElement).click();
+              }}
+              className="w-full px-4 py-3 bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 rounded-lg transition-all duration-300 flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-3">
+                <i className="fas fa-box text-blue-400 group-hover:scale-110 transition-transform"></i>
+                <span className="font-semibold">Thêm Gói Cước Mới</span>
+              </div>
+              <i className="fas fa-arrow-right text-gray-400 group-hover:text-blue-400 group-hover:translate-x-1 transition-all"></i>
+            </button>
+            <button
+              onClick={() => {
+                const ordersTab = document.querySelector('[data-tab="orders"]');
+                if (ordersTab) (ordersTab as HTMLElement).click();
+              }}
+              className="w-full px-4 py-3 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 rounded-lg transition-all duration-300 flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-3">
+                <i className="fas fa-shopping-cart text-purple-400 group-hover:scale-110 transition-transform"></i>
+                <span className="font-semibold">Xem Đơn Hàng</span>
+              </div>
+              <i className="fas fa-arrow-right text-gray-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all"></i>
+            </button>
+            <button
+              onClick={() => {
+                const ordersTab = document.querySelector('[data-tab="settings"]');
+                if (ordersTab) (ordersTab as HTMLElement).click();
+              }}
+              className="w-full px-4 py-3 bg-green-600/20 hover:bg-green-600/30 border border-green-500/30 rounded-lg transition-all duration-300 flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-3">
+                <i className="fas fa-cog text-green-400 group-hover:scale-110 transition-transform"></i>
+                <span className="font-semibold">Cài Đặt Hệ Thống</span>
+              </div>
+              <i className="fas fa-arrow-right text-gray-400 group-hover:text-green-400 group-hover:translate-x-1 transition-all"></i>
+            </button>
+          </div>
+        </div>
+
+        <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 shadow-xl">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <i className="fas fa-info-circle text-blue-400"></i>
+            <span>Hướng Dẫn Sử Dụng</span>
+          </h3>
+          <p className="text-gray-400 mb-4 text-sm leading-relaxed">
+            Sử dụng menu bên trên để quản lý toàn bộ website và đơn hàng của bạn.
+          </p>
+          <div className="space-y-2 text-sm text-gray-400">
+            <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-white/5 transition-colors">
+              <i className="fas fa-check-circle text-green-400 mt-1"></i>
+              <div>
+                <span className="font-semibold text-gray-300">Quản lý gói cước:</span> Thêm, sửa, xóa các gói cước
+              </div>
+            </div>
+            <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-white/5 transition-colors">
+              <i className="fas fa-check-circle text-green-400 mt-1"></i>
+              <div>
+                <span className="font-semibold text-gray-300">Quản lý đơn hàng:</span> Xem và cập nhật trạng thái đơn hàng
+              </div>
+            </div>
+            <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-white/5 transition-colors">
+              <i className="fas fa-check-circle text-green-400 mt-1"></i>
+              <div>
+                <span className="font-semibold text-gray-300">Quản lý nội dung:</span> Chỉnh sửa nội dung website
+              </div>
+            </div>
+            <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-white/5 transition-colors">
+              <i className="fas fa-check-circle text-green-400 mt-1"></i>
+              <div>
+                <span className="font-semibold text-gray-300">Cài đặt:</span> Cấu hình MoMo, ZaloPay, và các thiết lập khác
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+      />
+    </div>
+  );
+}

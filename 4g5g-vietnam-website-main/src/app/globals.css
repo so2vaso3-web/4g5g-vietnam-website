@@ -1,0 +1,1014 @@
+/* Modern UI - Premium 4G/5G Website */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #0066ff;
+  --secondary-blue: #00d4ff;
+  --accent-teal: #00d9cc;
+  --white: #ffffff;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e5e5e5;
+  --dark-gray: #333333;
+  --text-dark: #1a1a1a;
+  --text-light: #666666;
+  --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%);
+  --gradient-secondary: linear-gradient(135deg, #00d9cc 0%, #0066ff 100%);
+  --gradient-accent: linear-gradient(135deg, #0066ff 0%, #00d9cc 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+body {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Be Vietnam Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Smooth animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.5s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glassmorphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-effect-dark {
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Soft shadow */
+.shadow-soft {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-soft-lg {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-soft-blue {
+  box-shadow: 0 10px 40px rgba(0, 102, 255, 0.15);
+}
+
+.shadow-soft-teal {
+  box-shadow: 0 10px 40px rgba(0, 217, 204, 0.15);
+}
+
+/* Gradient text */
+.gradient-text-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-secondary {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #0066ff;
+  border: 2px solid #0066ff;
+  padding: 10px 26px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: #0066ff;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+}
+
+/* Card styles */
+.card-modern {
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.card-modern:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-modern {
+    border-radius: 16px;
+    padding: 16px;
+  }
+}
+
+/* Không override main - để Tailwind classes hoạt động bình thường */
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1536px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  /* Mobile optimizations */
+  section {
+    scroll-margin-top: 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  /* Extra small devices */
+  .text-xs {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Chat Button Animations */
+@keyframes chatPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes chatGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5),
+                0 0 40px rgba(147, 51, 234, 0.3),
+                0 0 60px rgba(236, 72, 153, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.7),
+                0 0 60px rgba(147, 51, 234, 0.5),
+                0 0 90px rgba(236, 72, 153, 0.3);
+  }
+}
+
+.chat-button-pulse {
+  animation: chatPulse 2s ease-in-out infinite;
+}
+
+.chat-button-pulse:hover {
+  animation: chatGlow 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+button, a, input, textarea, select {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Extra small screens (phones in portrait) */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .hover\:scale-105:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  header, footer, nav {
+    display: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Hide scrollbar for horizontal scroll on mobile */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}
+
+/* Prevent zoom on input focus on mobile devices */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Additional prevention for mobile browsers */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%) translateX(-50%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) translateX(-50%);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.5s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.8)) drop-shadow(0 0 12px rgba(16, 185, 129, 0.4));
+  }
+  50% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 12px rgba(34, 197, 94, 1)) drop-shadow(0 0 18px rgba(16, 185, 129, 0.6));
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4), 0 0 20px rgba(168, 85, 247, 0.2), 0 0 30px rgba(236, 72, 153, 0.1);
+  }
+  50% {
+    box-shadow: 0 15px 50px rgba(99, 102, 241, 0.6), 0 0 30px rgba(168, 85, 247, 0.4), 0 0 40px rgba(236, 72, 153, 0.3);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 2s ease-out infinite;
+}
+
+/* Dark select dropdown styling - CHỈ áp dụng cho select có class dark-select */
+/* Không dùng global select {} để tránh làm đen toàn bộ trang */
+select.dark-select {
+  background-color: #1f2937 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 12px 12px !important;
+  color: #ffffff !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding-right: 2.5rem !important;
+}
+
+select.dark-select:focus {
+  background-color: #1f2937 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 12px 12px !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+select.dark-select option {
+  background-color: #1f2937 !important;
+  background: #1f2937 !important;
+  color: #ffffff !important;
+  padding: 8px 12px !important;
+}
+
+select.dark-select option:hover {
+  background-color: #374151 !important;
+  background: #374151 !important;
+  color: #ffffff !important;
+}
+
+select.dark-select option:checked,
+select.dark-select option:focus {
+  background-color: #3b82f6 !important;
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+select.dark-select option:active {
+  background-color: #2563eb !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+}
+
+select.dark-select::-ms-expand {
+  display: none !important;
+}
+
+/* Network select - giữ lại cho tương thích */
+select.network-select {
+  background-color: #1f2937 !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 12px 12px !important;
+  color: #ffffff !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  padding-right: 2.5rem !important;
+}
+
+select.network-select option {
+  background-color: #1f2937 !important;
+  background: #1f2937 !important;
+  color: #ffffff !important;
+  padding: 8px 12px !important;
+}
+
+select.network-select option:checked {
+  background-color: #3b82f6 !important;
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+select.network-select::-ms-expand {
+  display: none !important;
+}
+
+/* PayPal Button Styling - Make it more prominent */
+.paypal-button-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Style PayPal buttons to be more prominent */
+.paypal-button-wrapper iframe,
+.paypal-button-wrapper div[data-paypal-button] {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+/* Make PayPal button container more visible */
+.paypal-button-wrapper > div {
+  min-height: 55px !important;
+  border-radius: 16px !important;
+}
+
+/* Style PayPal button itself - make it larger and more prominent */
+.paypal-button-wrapper button,
+.paypal-button-wrapper [role="button"],
+.paypal-button-wrapper iframe {
+  min-height: 55px !important;
+  height: auto !important;
+  border-radius: 16px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.paypal-button-wrapper button:hover,
+.paypal-button-wrapper [role="button"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(255, 196, 0, 0.4) !important;
+}
+
+/* Style credit/debit card button specifically - Make it stand out more */
+.paypal-button-wrapper [data-funding-source="card"],
+.paypal-button-wrapper [data-funding-source="credit"] {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: 3px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 16px !important;
+  min-height: 55px !important;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5), 0 0 0 2px rgba(102, 126, 234, 0.2) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.paypal-button-wrapper [data-funding-source="card"]::before,
+.paypal-button-wrapper [data-funding-source="credit"]::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -2px !important;
+  left: -2px !important;
+  right: -2px !important;
+  bottom: -2px !important;
+  border-radius: 16px !important;
+  padding: 2px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(102, 126, 234, 0.6)) !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+  -webkit-mask-composite: xor !important;
+  mask-composite: exclude !important;
+  z-index: -1 !important;
+}
+
+.paypal-button-wrapper [data-funding-source="card"]:hover,
+.paypal-button-wrapper [data-funding-source="credit"]:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.7), 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Make PayPal logo button more prominent - Add glowing border */
+.paypal-button-wrapper [data-funding-source="paypal"] {
+  background: linear-gradient(135deg, #ffc439 0%, #ffb300 100%) !important;
+  border: 3px solid rgba(255, 196, 57, 0.7) !important;
+  border-radius: 16px !important;
+  min-height: 55px !important;
+  box-shadow: 0 6px 20px rgba(255, 196, 57, 0.5), 0 0 0 2px rgba(255, 196, 57, 0.2) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.paypal-button-wrapper [data-funding-source="paypal"]::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -2px !important;
+  left: -2px !important;
+  right: -2px !important;
+  bottom: -2px !important;
+  border-radius: 16px !important;
+  padding: 2px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 196, 57, 0.6)) !important;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+  -webkit-mask-composite: xor !important;
+  mask-composite: exclude !important;
+  z-index: -1 !important;
+}
+
+.paypal-button-wrapper [data-funding-source="paypal"]:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 8px 30px rgba(255, 196, 57, 0.7), 0 0 0 3px rgba(255, 196, 57, 0.3) !important;
+  border-color: rgba(255, 196, 57, 0.9) !important;
+}
+
+/* Target all PayPal SDK rendered buttons */
+.paypal-button-wrapper * {
+  border-radius: 16px !important;
+}
+
+/* Style PayPal buttons with more specific selectors */
+.paypal-button-wrapper [id*="paypal"],
+.paypal-button-wrapper [class*="paypal"],
+.paypal-button-wrapper [class*="PayPal"] {
+  border-radius: 16px !important;
+  min-height: 55px !important;
+}
+
+/* Make credit card button stand out more - Enhanced with glowing border */
+.paypal-button-wrapper [data-funding-source="card"] button,
+.paypal-button-wrapper [data-funding-source="credit"] button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: 3px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 16px !important;
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  padding: 14px 28px !important;
+  min-height: 55px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5), 0 0 0 2px rgba(102, 126, 234, 0.2) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.paypal-button-wrapper [data-funding-source="card"] button::before,
+.paypal-button-wrapper [data-funding-source="credit"] button::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%) !important;
+  animation: shimmer 3s infinite !important;
+}
+
+@keyframes shimmer {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.paypal-button-wrapper [data-funding-source="card"] button:hover,
+.paypal-button-wrapper [data-funding-source="credit"] button:hover {
+  background: linear-gradient(135deg, #7c8ef5 0%, #8a5fb8 100%) !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.7), 0 0 0 3px rgba(102, 126, 234, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Make PayPal button stand out more - Enhanced with glowing border */
+.paypal-button-wrapper [data-funding-source="paypal"] button {
+  background: linear-gradient(135deg, #ffc439 0%, #ffb300 100%) !important;
+  border: 3px solid rgba(255, 196, 57, 0.8) !important;
+  border-radius: 16px !important;
+  min-height: 55px !important;
+  font-size: 16px !important;
+  padding: 14px 28px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px rgba(255, 196, 57, 0.5), 0 0 0 2px rgba(255, 196, 57, 0.2) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.paypal-button-wrapper [data-funding-source="paypal"] button::before {
+  content: '' !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%) !important;
+  animation: shimmer 3s infinite !important;
+}
+
+.paypal-button-wrapper [data-funding-source="paypal"] button:hover {
+  background: linear-gradient(135deg, #ffd054 0%, #ffc439 100%) !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 8px 30px rgba(255, 196, 57, 0.7), 0 0 0 3px rgba(255, 196, 57, 0.3) !important;
+  border-color: rgba(255, 196, 57, 1) !important;
+}
+
+/* Mobile specific - make buttons even more prominent */
+@media (max-width: 640px) {
+  .paypal-button-wrapper button,
+  .paypal-button-wrapper [role="button"],
+  .paypal-button-wrapper iframe {
+    min-height: 60px !important;
+    font-size: 16px !important;
+  }
+  
+  .paypal-button-wrapper [data-funding-source="card"],
+  .paypal-button-wrapper [data-funding-source="credit"],
+  .paypal-button-wrapper [data-funding-source="paypal"] {
+    min-height: 60px !important;
+    font-size: 16px !important;
+  }
+  
+  .paypal-button-wrapper [data-funding-source="card"] button,
+  .paypal-button-wrapper [data-funding-source="credit"] button,
+  .paypal-button-wrapper [data-funding-source="paypal"] button {
+    min-height: 60px !important;
+    font-size: 17px !important;
+    padding: 14px 20px !important;
+  }
+}
+
+/* Prevent zoom on mobile when focusing input/textarea - Force font-size >= 16px */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Allow smaller font on labels and other text, but not inputs */
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 16px !important;
+    opacity: 0.6 !important;
+  }
+  
+  /* Better touch targets on mobile */
+  input,
+  textarea,
+  button,
+  select {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1) !important;
+    tap-highlight-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* Smooth scrolling for modal on mobile */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+  }
+  
+  /* Prevent autofill overlay from breaking layout */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset !important;
+    box-shadow: 0 0 0px 1000px #1f2937 inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+    font-size: 16px !important;
+  }
+}
+
+/* Fix PayPal dropdown country selection - Mobile friendly */
+.paypal-button-wrapper {
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+}
+
+.paypal-button-wrapper iframe {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* PayPal form dropdowns - High z-index and proper positioning */
+body [data-paypal-button] select,
+body [id*="paypal"] select,
+body [class*="paypal"] select,
+body [id*="paypal"] [role="listbox"],
+body [class*="paypal"] [role="listbox"],
+body [id*="paypal"] [role="combobox"],
+body [class*="paypal"] [role="combobox"] {
+  z-index: 10050 !important;
+  position: relative !important;
+}
+
+/* PayPal dropdown menu - Ensure it's visible */
+body [id*="paypal"] [role="listbox"] > *,
+body [class*="paypal"] [role="listbox"] > *,
+body [id*="paypal"] ul[role="listbox"],
+body [class*="paypal"] ul[role="listbox"] {
+  z-index: 10051 !important;
+  position: absolute !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+
+/* Modal adjustments for PayPal dropdowns */
+.max-h-\[85vh\],
+.max-h-\[95vh\] {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+}
+
+/* PayPal container - Allow dropdown overflow */
+[id*="paypal-button-container"],
+[class*="paypal-button"] {
+  overflow: visible !important;
+  position: relative !important;
+  min-height: 200px !important;
+}
+
+/* Mobile specific fixes for PayPal dropdowns */
+@media (max-width: 768px) {
+  /* Ensure modal has enough space for dropdown */
+  .max-h-\[85vh\] {
+    max-height: 90vh !important;
+    padding-bottom: 100px !important;
+  }
+  
+  /* PayPal dropdown on mobile */
+  body [id*="paypal"] [role="listbox"],
+  body [class*="paypal"] [role="listbox"] {
+    max-height: 250px !important;
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+  
+  /* PayPal container on mobile */
+  [id*="paypal-button-container"] {
+    min-height: 300px !important;
+    margin-bottom: 50px !important;
+  }
+}
+
+/* Force chat widget to have solid background - no transparency */
+.chat-widget-modal {
+  background-color: #1e293b !important;
+  background: #1e293b !important;
+  opacity: 1 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.chat-widget-modal > div:not([class*="gradient"]):not([class*="bg-gradient"]) {
+  background-color: #1e293b !important;
+  background: #1e293b !important;
+}
+
+/* Message fade-in animation - CHỈ ÁP DỤNG KHI CẦN (đã tắt để tránh nhảy) */
+@keyframes message-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-message-fade-in {
+  animation: message-fade-in 0.1s ease-out forwards;
+}
+
