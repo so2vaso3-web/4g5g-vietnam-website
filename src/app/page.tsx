@@ -22,7 +22,8 @@ export default function Home() {
       <VisitorTracker />
       {/* WelcomeBanner tạm thời tắt để web có nền trắng */}
       {/* <WelcomeBanner /> */}
-      <TrustBanner />
+      {/* TrustBanner tạm thời tắt */}
+      {/* <TrustBanner /> */}
       <Header />
       <Hero />
       <CarrierSection />
