@@ -324,9 +324,16 @@ export default function ChatWidget() {
           visitorId,
           isReply: false,
         }),
-      }).catch((error) => {
-        console.error('Error sending Telegram notification:', error);
-      }),
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            console.warn('[chat] Telegram notify failed:', res.status, body);
+          }
+        })
+        .catch((error) => {
+          console.error('[chat] Telegram notify error:', error);
+        }),
     ]);
 
     setTimeout(() => {

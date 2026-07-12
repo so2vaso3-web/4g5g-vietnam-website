@@ -6,62 +6,48 @@ const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
 async function getTelegramSettings(): Promise<{ botToken: string; chatId: string } | null> {
   try {
     let settings = await readSettingsFromKV(true);
-    
-    if (!settings || typeof settings !== 'object' || !settings.telegramBotToken || !settings.telegramChatId) {
-      console.log('KV/Redis settings not found or incomplete, trying file system fallback...');
-      try {
-        const fs = require('fs').promises;
-        const path = require('path');
-        const possiblePaths = [
-          path.join(process.cwd(), 'data', 'settings.json'),
-          path.join(process.cwd(), 'data', 'adminSettings.json'),
-        ];
-        
-        for (const settingsPath of possiblePaths) {
-          try {
-            const fileContent = await fs.readFile(settingsPath, 'utf-8');
-            const fileSettings = JSON.parse(fileContent);
-            if (fileSettings && typeof fileSettings === 'object') {
-              settings = fileSettings;
-              console.log(`Loaded settings from file system: ${settingsPath}`);
-              break;
-            }
-          } catch (fileError) {
-            continue;
-          }
-        }
-      } catch (fileError) {
-        console.log('File system fallback failed:', fileError);
-      }
+
+    if (!settings || typeof settings !== 'object') {
+      console.log('[telegram] settings not found in KV');
+      return null;
     }
-    
-    if (settings && typeof settings === 'object') {
-      const hasToken = !!settings.telegramBotToken;
-      const hasChatId = !!settings.telegramChatId;
-      if (hasToken && hasChatId) {
-        const botToken = String(settings.telegramBotToken).trim();
-        const chatId = String(settings.telegramChatId).trim();
-        
-        if (!botToken.includes(':')) {
-          console.error('Invalid bot token format (should contain colon)');
-          return null;
-        }
-        
-        if (!chatId.match(/^-?\d+$/)) {
-          console.error('Invalid chat ID format (should be numeric)');
-          return null;
-        }
-        
-        return {
-          botToken,
-          chatId,
-        };
-      } else {
-        console.warn('Telegram settings missing:', { hasToken, hasChatId });
-      }
+
+    const rawToken = settings.telegramBotToken;
+    const rawChatId = settings.telegramChatId;
+    const hasToken = !!rawToken;
+    const hasChatId = !!rawChatId;
+
+    if (!hasToken || !hasChatId) {
+      console.warn('[telegram] Missing settings:', { hasToken, hasChatId });
+      return null;
     }
+
+    let botToken = String(rawToken).trim();
+    let chatId = String(rawChatId).trim();
+
+    // Auto-fallback: token still encrypted (stale KV from old key) -> return as-is
+    // and let sendToTelegram fail with a clear error so we know what to fix.
+    if (botToken.startsWith('encrypted:')) {
+      console.error(
+        '[telegram] Bot token returned by readSettingsFromKV is still encrypted. ' +
+          'This usually means MASTER_KEY changed since the token was saved. ' +
+          'Re-save the bot token in Admin Settings to re-encrypt with the current key.',
+      );
+    }
+
+    if (!botToken.includes(':')) {
+      console.error('[telegram] Invalid bot token format (should contain colon):', botToken.length);
+      return null;
+    }
+
+    if (!chatId.match(/^-?\d+$/)) {
+      console.error('[telegram] Invalid chat ID format (should be numeric):', chatId.length);
+      return null;
+    }
+
+    return { botToken, chatId };
   } catch (error) {
-    console.error('Error reading Telegram settings:', error);
+    console.error('[telegram] Error reading Telegram settings:', error);
   }
   return null;
 }
@@ -73,14 +59,17 @@ async function sendToTelegram(
 ): Promise<boolean> {
   try {
     if (!botToken || !chatId) {
-      console.error('Missing Telegram credentials:', { hasToken: !!botToken, hasChatId: !!chatId });
+      console.error('[telegram] Missing credentials:', {
+        hasToken: !!botToken,
+        hasChatId: !!chatId,
+      });
       return false;
     }
 
     const trimmedToken = botToken.trim();
     const trimmedChatId = chatId.trim();
     const chatIdNum = isNaN(Number(trimmedChatId)) ? trimmedChatId : Number(trimmedChatId);
-    
+
     const url = `${TELEGRAM_API_URL}${trimmedToken}/sendMessage`;
     const response = await fetch(url, {
       method: 'POST',
@@ -94,21 +83,27 @@ async function sendToTelegram(
       }),
     });
 
-    const data = await response.json();
-    
+    let data: any = {};
+    try {
+      data = await response.json();
+    } catch {
+      data = {};
+    }
+
     if (!response.ok || !data.ok) {
-      console.error('Telegram API error:', {
+      console.error('[telegram] API error:', {
         status: response.status,
         statusText: response.statusText,
         error: data.description || data.error_code || 'Unknown error',
+        chatId: chatIdNum,
       });
       return false;
     }
-    
-    console.log('Telegram message sent successfully to chat:', chatIdNum);
+
+    console.log('[telegram] sent OK to chat', chatIdNum);
     return true;
   } catch (error) {
-    console.error('Error sending to Telegram:', error);
+    console.error('[telegram] send error:', error);
     return false;
   }
 }
@@ -129,16 +124,25 @@ export async function POST(request: NextRequest) {
 
     if (!telegramSettings) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Telegram not configured. Please configure Telegram Bot Token and Chat ID in Admin Settings.' 
+        {
+          success: false,
+          error: 'Telegram not configured. Please configure Telegram Bot Token and Chat ID in Admin Settings.',
+          debug: {
+            hasToken: false,
+            hasChatId: false,
+            tokenLength: 0,
+            chatId: null,
+            tokenStillEncrypted: null,
+          },
         },
         { status: 400 }
       );
     }
 
+    const tokenStillEncrypted = telegramSettings.botToken.startsWith('encrypted:');
+
     let telegramMessage: string;
-    
+
     if (isReply) {
       telegramMessage = `
 ✅ <b>Admin Reply Sent</b>
@@ -178,17 +182,27 @@ ${messageText}
         success: true,
         message: 'Message sent to Telegram successfully',
       });
-    } else {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Failed to send message to Telegram. Please check: 1) Bot token is correct, 2) Chat ID is correct, 3) Bot has been started (send /start to bot), 4) Bot has permission to send messages to this chat.',
-        },
-        { status: 500 }
-      );
     }
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: 'Failed to send message to Telegram. Check: 1) Bot token is correct, 2) Chat ID is correct, 3) Bot has been started (send /start to bot), 4) Bot has permission to send messages to this chat.',
+        debug: {
+          hasToken: !!telegramSettings.botToken,
+          hasChatId: !!telegramSettings.chatId,
+          tokenLength: telegramSettings.botToken.length,
+          chatId: telegramSettings.chatId,
+          tokenStillEncrypted,
+          hint: tokenStillEncrypted
+            ? 'Token returned by KV is still encrypted. MASTER_KEY may have changed since the token was saved. Re-save the bot token in Admin Settings.'
+            : 'Token format looks OK. Verify with @BotFather and re-send /start to the bot.',
+        },
+      },
+      { status: 500 }
+    );
   } catch (error) {
-    console.error('Error in POST /api/telegram:', error);
+    console.error('[telegram] POST error:', error);
     return NextResponse.json(
       { success: false, error: 'Internal server error' },
       { status: 500 }
