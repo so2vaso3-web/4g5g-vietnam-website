@@ -4,13 +4,21 @@ import { useEffect, useState } from 'react';
 import { Mail, Phone, MapPin, Clock, MessageCircle } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
-const CONTACTS = [
+type ContactRenderResult = { type: 'link'; href: string; value: string } | { type: 'text'; value: string };
+
+const CONTACTS: Array<{
+  icon: typeof Mail;
+  label: string;
+  color: string;
+  bg: string;
+  render: (info: any) => ContactRenderResult;
+}> = [
   {
     icon: Mail,
     label: 'Email',
     color: 'text-brand-300',
     bg: 'bg-brand-500/15 ring-brand-400/20',
-    render: (info: any) => ({
+    render: (info) => ({
       type: 'link',
       href: `mailto:${info.email}`,
       value: info.email,
@@ -21,7 +29,7 @@ const CONTACTS = [
     label: 'Điện thoại',
     color: 'text-purple-300',
     bg: 'bg-purple-500/15 ring-purple-400/20',
-    render: (info: any) => ({
+    render: (info) => ({
       type: 'link',
       href: `tel:${info.phone.replace(/\D/g, '')}`,
       value: info.phone,
@@ -32,14 +40,14 @@ const CONTACTS = [
     label: 'Địa chỉ',
     color: 'text-emerald-300',
     bg: 'bg-emerald-500/15 ring-emerald-400/20',
-    render: (info: any) => ({ type: 'text', value: info.address }),
+    render: (info) => ({ type: 'text', value: info.address }),
   },
   {
     icon: Clock,
     label: 'Giờ làm việc',
     color: 'text-amber-300',
     bg: 'bg-amber-500/15 ring-amber-400/20',
-    render: (info: any) => ({ type: 'text', value: info.businessHours }),
+    render: (info) => ({ type: 'text', value: info.businessHours }),
   },
 ];
 
@@ -161,7 +169,7 @@ export default function ContactSection() {
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
             {CONTACTS.map((c) => {
               const Icon = c.icon;
-              const { type, href, value } = c.render(contactInfo);
+              const rendered = c.render(contactInfo);
               const body = (
                 <>
                   <div
@@ -173,7 +181,7 @@ export default function ContactSection() {
                     {c.label}
                   </div>
                   <div className="mt-1.5 break-words text-sm font-semibold text-text-primary transition-colors group-hover:text-brand-300 sm:text-base">
-                    {value}
+                    {rendered.value}
                   </div>
                 </>
               );
@@ -181,8 +189,8 @@ export default function ContactSection() {
               const cardClass =
                 'group relative overflow-hidden rounded-2xl border border-border bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-card-hover sm:p-6';
 
-              return type === 'link' ? (
-                <a key={c.label} href={href} className={cardClass}>
+              return rendered.type === 'link' ? (
+                <a key={c.label} href={rendered.href} className={cardClass}>
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0 bg-gradient-brand-soft opacity-0 transition-opacity duration-300 group-hover:opacity-100"
