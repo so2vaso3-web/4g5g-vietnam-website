@@ -246,18 +246,18 @@ export default function CheckoutModal({ pkg, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-[120] flex items-stretch justify-center overflow-y-auto bg-slate-950/80 backdrop-blur-md sm:items-center sm:px-4 sm:py-6 lg:px-8"
+      className="modal-scroll fixed inset-0 z-[120] flex items-stretch justify-center overflow-y-auto overscroll-contain bg-slate-950/80 px-0 py-0 backdrop-blur-md sm:items-center sm:px-4 sm:py-6 lg:px-8"
       onMouseDown={onBackdrop}
       role="dialog"
       aria-modal="true"
     >
-      <div className="relative flex w-full max-w-5xl flex-col overflow-hidden border border-white/10 bg-slate-950/95 shadow-[0_30px_120px_-30px_rgba(2,6,23,0.95)] ring-1 ring-white/5 sm:rounded-[28px] lg:rounded-[32px]">
+      <div className="relative flex w-full max-w-5xl flex-col overflow-hidden border border-white/10 bg-slate-950/95 shadow-[0_30px_120px_-30px_rgba(2,6,23,0.95)] ring-1 ring-white/5 sm:my-0 sm:min-h-0 sm:rounded-[28px] lg:rounded-[32px]">
         <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-cyan-500/25 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-emerald-500/20 blur-3xl" />
 
         {/* Header */}
-        <div className="relative flex items-start justify-between gap-3 border-b border-white/10 px-4 py-4 sm:gap-4 sm:px-6 sm:py-5 lg:px-8 lg:py-6">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b border-white/10 bg-slate-950/95 px-4 py-4 backdrop-blur-md sm:static sm:gap-4 sm:px-6 sm:py-5 sm:backdrop-blur-none lg:px-8 lg:py-6">
           <div className="flex-1 space-y-2.5 sm:space-y-3">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/85 sm:px-3">
               Thanh toán an toàn · 256-bit SSL
@@ -334,7 +334,7 @@ export default function CheckoutModal({ pkg, onClose }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="relative flex items-center justify-between gap-3 border-t border-white/10 bg-white/[0.02] px-4 py-3 text-[11px] text-white/55 sm:px-6 lg:px-8">
+        <div className="sticky bottom-0 z-10 flex items-center justify-between gap-3 border-t border-white/10 bg-slate-950/95 px-4 py-3 text-[11px] text-white/55 backdrop-blur-md sm:static sm:bg-white/[0.02] sm:px-6 sm:backdrop-blur-none lg:px-8">
           <span className="truncate">Mạng Việt Nam · Hỗ trợ 24/7</span>
           <span className="font-semibold text-white/80">Tổng: {formatVND(pkg.price)}</span>
         </div>
