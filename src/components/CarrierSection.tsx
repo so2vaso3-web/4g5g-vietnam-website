@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Signal, TowerControl, Radio, Waves, Antenna } from 'lucide-react';
+import { WifiHigh, Radio, Waves, Antenna } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
 const CARRIERS = [
@@ -102,7 +102,7 @@ export default function CarrierSection() {
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <span className="section-eyebrow">
-              <Signal className="h-3.5 w-3.5" strokeWidth={2.2} />
+              <WifiHigh className="h-3.5 w-3.5" strokeWidth={2.2} />
               Đối tác chiến lược
             </span>
             <h2 className="section-title mt-5">
@@ -141,7 +141,7 @@ export default function CarrierSection() {
                         style={{ maxWidth: '100%', height: 'auto' }}
                       />
                     ) : (
-                      <Signal
+                      <WifiHigh
                         className={`h-6 w-6 ${carrier.text} sm:h-7 sm:w-7`}
                         strokeWidth={2}
                       />
