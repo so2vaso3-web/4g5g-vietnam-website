@@ -118,10 +118,19 @@ export default function ChatWidget() {
       rel="noopener noreferrer"
       aria-label="Nhắn qua Messenger"
       title="Nhắn qua Messenger"
-      className="group fixed bottom-4 right-4 z-50 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-brand text-white shadow-glow-blue transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-10px_rgba(37,99,235,0.7)] sm:bottom-6 sm:right-6"
+      className="group fixed bottom-4 right-4 z-50 inline-flex items-center gap-3 rounded-2xl bg-gradient-brand text-white shadow-glow-blue transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-10px_rgba(37,99,235,0.7)] sm:bottom-6 sm:right-6"
     >
       <span className="absolute inset-0 rounded-2xl bg-gradient-brand opacity-60 blur-xl transition-opacity duration-300 group-hover:opacity-90" />
-      <MessengerIcon className="relative h-7 w-7" />
+      <span className="relative hidden rounded-xl bg-white/15 px-3 py-1.5 text-sm font-semibold tracking-wide backdrop-blur-sm transition-all duration-300 group-hover:bg-white/25 sm:inline-block">
+        Hỗ trợ
+      </span>
+      <span className="relative inline-flex h-14 w-14 items-center justify-center">
+        <MessengerIcon className="relative h-7 w-7" />
+        <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-red-500" />
+        </span>
+      </span>
     </a>
   );
 }
