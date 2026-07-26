@@ -2,21 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, ShieldCheck, LayoutDashboard, Sparkles } from 'lucide-react';
-
-function MessengerLogo({ className }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}
-      aria-hidden
-    >
-      <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.891 1.436 5.464 3.681 7.133V22l3.373-1.848c.896.248 1.842.381 2.946.381 5.523 0 10-4.145 10-9.29C22 6.145 17.523 2 12 2zm1.073 12.367-2.664-2.842-5.196 2.842 5.715-6.075 2.732 2.842 5.122-2.842-5.709 6.077z" />
-    </svg>
-  );
-}
+import { Menu, X, ShieldCheck, LayoutDashboard, Sparkles, Signal } from 'lucide-react';
 
 const NAV_ITEMS = [
   { href: '#home', label: 'Trang chủ' },
@@ -100,7 +86,7 @@ export default function Header() {
           aria-label={websiteName}
         >
           <span className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-brand shadow-glow-blue transition-transform duration-300 group-hover:scale-105">
-            <MessengerLogo className="h-5 w-5 text-white" />
+            <Signal className="h-5 w-5 text-white" />
             <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3 items-center justify-center">
               <span className="absolute inline-flex h-full w-full animate-ping-soft rounded-full bg-accent/70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />

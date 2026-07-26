@@ -41,17 +41,30 @@ export default function TrustBanner() {
             <Award className="h-3 w-3" strokeWidth={2.4} />
             Verified
           </span>
-          <div className="marquee gap-8">
-            {[...ITEMS, ...ITEMS].map((item, idx) => {
+          <div className="hidden flex-wrap items-center gap-x-6 gap-y-2 sm:flex">
+            {ITEMS.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="flex flex-none items-center gap-2 text-xs font-medium text-text-secondary sm:text-sm"
+                  className="flex items-center gap-2 text-xs font-medium text-text-secondary sm:text-sm"
                 >
                   <Icon className="h-3.5 w-3.5 text-brand-300" strokeWidth={2} />
                   <span>{item.label}</span>
-                  <span className="ml-6 hidden h-1 w-1 rounded-full bg-text-secondary/50 sm:inline-block" />
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex items-center gap-x-6 gap-y-2 sm:hidden">
+            {ITEMS.slice(0, 2).map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 text-xs font-medium text-text-secondary"
+                >
+                  <Icon className="h-3.5 w-3.5 text-brand-300" strokeWidth={2} />
+                  <span>{item.label}</span>
                 </div>
               );
             })}
