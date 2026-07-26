@@ -9,7 +9,7 @@ import {
   Award,
   BadgeCheck,
   Sparkles,
-  WifiHigh,
+  Radar,
   ShieldCheck,
   Crown,
   Gem,
@@ -127,7 +127,7 @@ export default function Hero() {
         <div className="group relative h-14 w-14 animate-float-slow">
           <div className="absolute inset-0 rounded-xl bg-emerald-500 opacity-20 blur-lg transition-opacity duration-500 group-hover:opacity-50" />
           <div className="absolute inset-0 rounded-xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/25 to-cyan-500/15 backdrop-blur-md transition-all duration-500 group-hover:rotate-12" />
-          <WifiHigh className="absolute inset-0 m-auto h-6 w-6 text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" strokeWidth={1.8} />
+          <Radar className="absolute inset-0 m-auto h-6 w-6 text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" strokeWidth={1.8} />
         </div>
       </div>
 
@@ -206,7 +206,7 @@ export default function Hero() {
           {/* Stats grid */}
           <div className="mt-16 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {[
-              { value: '9+', label: 'Nhà mạng', icon: WifiHigh },
+              { value: '9+', label: 'Nhà mạng', icon: Radar },
               { value: '35+', label: 'Gói cước', icon: Gem },
               { value: '50K', label: 'Khách hàng', icon: Globe },
               { value: '24/7', label: 'Hỗ trợ', icon: Zap },
