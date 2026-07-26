@@ -4,7 +4,6 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import IntroBanner from '@/components/IntroBanner';
 import WelcomeBanner from '@/components/WelcomeBanner';
-import TrustBanner from '@/components/TrustBanner';
 import CarrierSection from '@/components/CarrierSection';
 import PlansSection from '@/components/PlansSection';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -21,7 +20,6 @@ export default function Home() {
       <VisitorTracker />
       {/* WelcomeBanner tạm thời tắt để web có nền trắng */}
       {/* <WelcomeBanner /> */}
-      <TrustBanner />
       <Header />
       <Hero />
       <CarrierSection />
