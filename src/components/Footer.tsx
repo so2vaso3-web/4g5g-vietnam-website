@@ -13,7 +13,6 @@ import {
   Sparkles,
   Heart,
   Crown,
-  Facebook,
   Send,
 } from 'lucide-react';
 
