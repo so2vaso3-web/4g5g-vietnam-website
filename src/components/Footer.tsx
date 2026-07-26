@@ -11,9 +11,13 @@ import {
   Wallet,
   Smartphone,
   Sparkles,
+  Heart,
+  Crown,
+  Facebook,
+  Send,
 } from 'lucide-react';
 
-function MessengerIcon({ className }: { className?: string }) {
+function ZaloIcon({ className }: { className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +26,21 @@ function MessengerIcon({ className }: { className?: string }) {
       className={className}
       aria-hidden
     >
-      <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.891 1.436 5.464 3.681 7.133V22l3.373-1.848c.896.248 1.842.381 2.946.381 5.523 0 10-4.145 10-9.29C22 6.145 17.523 2 12 2zm1.073 12.367-2.664-2.842-5.196 2.842 5.715-6.075 2.732 2.842 5.122-2.842-5.709 6.077z" />
+      <path d="M12 2C6.477 2 2 5.935 2 10.74c0 3.085 1.726 5.802 4.34 7.43-.198.745-.728 2.55-.834 2.94-.13.487.179.483.376.353.157-.103 2.013-1.366 2.836-1.926.74.2 1.528.318 2.282.318 5.523 0 10-3.935 10-8.74C22 5.935 17.523 2 12 2zm2.866 11.866h-5.6c-.466 0-.846-.38-.846-.846s.38-.846.846-.846h5.6c.466 0 .846.38.846.846s-.38.846-.846.846zm-1.6-3.466h-4c-.466 0-.846-.38-.846-.846s.38-.846.846-.846h4c.466 0 .846.38.846.846s-.38.846-.846.846z" />
+    </svg>
+  );
+}
+
+function FacebookZaloIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="10" />
     </svg>
   );
 }
@@ -90,8 +108,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-brand shadow-glow-blue">
+              <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-brand shadow-glow-blue">
                 <Signal className="h-5 w-5 text-white" strokeWidth={2.2} />
+                <span className="absolute -right-0.5 -top-0.5 flex h-3 w-3 items-center justify-center">
+                  <span className="absolute inline-flex h-full w-full animate-ping-soft rounded-full bg-accent/70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
               </span>
               <div className="flex flex-col leading-tight">
                 <span className="text-base font-bold text-text-primary sm:text-lg">
@@ -114,11 +136,17 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="group inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/5 text-text-secondary transition-all hover:-translate-y-0.5 hover:border-brand-500/50 hover:bg-brand-500/10 hover:text-text-primary"
+                  className="group inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-white/5 text-text-secondary transition-all hover:-translate-y-0.5 hover:border-[#1877F2]/60 hover:bg-[#1877F2]/10 hover:text-[#1877F2] hover:shadow-[0_8px_24px_-6px_rgba(24,119,242,0.4)]"
                 >
-                  <span className="text-lg font-bold leading-none" aria-hidden>
-                    f
-                  </span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="h-5 w-5 transition-transform duration-300 group-hover:scale-110"
+                    aria-hidden
+                  >
+                    <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12z" />
+                  </svg>
                 </a>
               )}
               {settings.zalo && (
@@ -127,9 +155,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Zalo"
-                  className="group inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/5 text-text-secondary transition-all hover:-translate-y-0.5 hover:border-brand-500/50 hover:bg-brand-500/10 hover:text-text-primary"
+                  className="group inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-white/5 text-text-secondary transition-all hover:-translate-y-0.5 hover:border-[#0068FF]/60 hover:bg-[#0068FF]/10 hover:text-[#0068FF] hover:shadow-[0_8px_24px_-6px_rgba(0,104,255,0.4)]"
                 >
-                  <MessengerIcon className="h-4.5 w-4.5" />
+                  <ZaloIcon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
               )}
               <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-emerald-300">

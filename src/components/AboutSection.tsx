@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ShieldCheck, Zap, Headphones, Info } from 'lucide-react';
+import { ShieldCheck, Zap, Headphones, Info, Lock, Heart, Users } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
 export default function AboutSection() {
@@ -98,21 +98,27 @@ export default function AboutSection() {
               title: 'An toàn',
               desc: 'Giao dịch an toàn và bảo mật với xử lý thanh toán được mã hóa',
               color: 'text-brand-300',
-              bg: 'from-brand-500/20 to-brand-500/5',
+              bg: 'from-brand-500/25 to-brand-500/10',
+              iconBg: 'bg-brand-500/20',
+              ring: 'ring-brand-400/30',
             },
             {
               icon: Zap,
               title: 'Nhanh',
               desc: 'Kích hoạt và thiết lập nhanh chóng — kết nối trong vài phút',
               color: 'text-purple-300',
-              bg: 'from-purple-500/20 to-purple-500/5',
+              bg: 'from-purple-500/25 to-purple-500/10',
+              iconBg: 'bg-purple-500/20',
+              ring: 'ring-purple-400/30',
             },
             {
-              icon: Headphones,
+              icon: Heart,
               title: 'Hỗ trợ',
               desc: 'Hỗ trợ khách hàng 24/7 để giúp bạn với mọi câu hỏi',
               color: 'text-pink-300',
-              bg: 'from-pink-500/20 to-pink-500/5',
+              bg: 'from-pink-500/25 to-rose-500/10',
+              iconBg: 'bg-pink-500/20',
+              ring: 'ring-pink-400/30',
             },
           ].map((pillar, idx) => {
             const Icon = pillar.icon;
@@ -124,9 +130,9 @@ export default function AboutSection() {
                   />
                   <div className="relative">
                     <div
-                      className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-bg-base/40 transition-transform duration-300 group-hover:scale-110`}
+                      className={`mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl ${pillar.iconBg} ring-1 ${pillar.ring} transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow-blue`}
                     >
-                      <Icon className={`h-6 w-6 ${pillar.color}`} strokeWidth={1.8} />
+                      <Icon className={`h-7 w-7 ${pillar.color}`} strokeWidth={2} />
                     </div>
                     <h3 className="text-base font-bold text-text-primary sm:text-lg">
                       {pillar.title}

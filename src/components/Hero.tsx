@@ -5,12 +5,19 @@ import {
   Rocket,
   ArrowRight,
   Info,
-  ShieldCheck,
   Lock,
   Award,
   BadgeCheck,
   Sparkles,
   Signal,
+  ShieldCheck,
+  Crown,
+  Gem,
+  Zap,
+  Globe,
+  TowerControl,
+  Waves,
+  Radio,
 } from 'lucide-react';
 import { Button } from './ui/Button';
 
@@ -19,7 +26,7 @@ const TRUST_BADGES = [
   { icon: Lock, label: 'Tuân thủ PCI', color: 'text-brand-400' },
   { icon: BadgeCheck, label: 'Đối tác chứng nhận', color: 'text-amber-400' },
   { icon: Award, label: 'Nhà phân phối chính thức', color: 'text-cyan-400' },
-  { icon: Sparkles, label: 'Dịch vụ tốt nhất 2025', color: 'text-fuchsia-400' },
+  { icon: Crown, label: 'Dịch vụ tốt nhất 2025', color: 'text-fuchsia-400' },
 ];
 
 export default function Hero() {
@@ -93,26 +100,35 @@ export default function Hero() {
         }}
       />
 
-      {/* Floating ornaments */}
+      {/* Floating ornaments - hiện đại hơn */}
       <div
         aria-hidden
         className="absolute right-[8%] top-32 hidden md:block"
       >
-        <div className="relative h-20 w-20 animate-float-slow">
-          <div className="absolute inset-0 rotate-45 rounded-2xl border border-brand-500/30 bg-gradient-brand-soft" />
-          <Signal className="absolute inset-0 m-auto h-8 w-8 text-brand-300" strokeWidth={1.6} />
+        <div className="group relative h-20 w-20 animate-float-slow">
+          <div className="absolute inset-0 rounded-2xl bg-gradient-brand opacity-20 blur-2xl transition-opacity duration-500 group-hover:opacity-50" />
+          <div className="absolute inset-0 rotate-6 rounded-2xl border border-brand-400/40 bg-gradient-to-br from-brand-500/30 to-accent/20 backdrop-blur-md transition-all duration-500 group-hover:rotate-12" />
+          <Radio className="absolute inset-0 m-auto h-8 w-8 text-brand-300 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" strokeWidth={1.8} />
         </div>
       </div>
       <div
         aria-hidden
         className="absolute left-[6%] bottom-32 hidden md:block"
       >
-        <div className="relative h-16 w-16 animate-float-slow">
-          <div className="absolute inset-0 rounded-full border border-accent/30 bg-accent/10" />
-          <Sparkles
-            className="absolute inset-0 m-auto h-7 w-7 text-accent-400"
-            strokeWidth={1.6}
-          />
+        <div className="group relative h-16 w-16 animate-float-slow">
+          <div className="absolute inset-0 rounded-full bg-accent opacity-20 blur-xl transition-opacity duration-500 group-hover:opacity-50" />
+          <div className="absolute inset-0 rounded-full border border-accent/40 bg-gradient-to-br from-accent/30 to-fuchsia-500/20 backdrop-blur-md transition-all duration-500 group-hover:scale-110" />
+          <Waves className="absolute inset-0 m-auto h-7 w-7 text-accent-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]" strokeWidth={1.8} />
+        </div>
+      </div>
+      <div
+        aria-hidden
+        className="absolute right-[20%] bottom-48 hidden lg:block"
+      >
+        <div className="group relative h-14 w-14 animate-float-slow">
+          <div className="absolute inset-0 rounded-xl bg-emerald-500 opacity-20 blur-lg transition-opacity duration-500 group-hover:opacity-50" />
+          <div className="absolute inset-0 rounded-xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/25 to-cyan-500/15 backdrop-blur-md transition-all duration-500 group-hover:rotate-12" />
+          <TowerControl className="absolute inset-0 m-auto h-6 w-6 text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]" strokeWidth={1.8} />
         </div>
       </div>
 
@@ -191,23 +207,30 @@ export default function Hero() {
           {/* Stats grid */}
           <div className="mt-16 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
             {[
-              { value: '9+', label: 'Nhà mạng' },
-              { value: '35+', label: 'Gói cước' },
-              { value: '50K', label: 'Khách hàng' },
-              { value: '24/7', label: 'Hỗ trợ' },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="glass rounded-2xl px-4 py-5 text-center transition-transform duration-300 hover:-translate-y-0.5"
-              >
-                <div className="text-2xl font-extrabold text-gradient sm:text-3xl">
-                  {stat.value}
+              { value: '9+', label: 'Nhà mạng', icon: TowerControl },
+              { value: '35+', label: 'Gói cước', icon: Gem },
+              { value: '50K', label: 'Khách hàng', icon: Globe },
+              { value: '24/7', label: 'Hỗ trợ', icon: Zap },
+            ].map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <div
+                  key={stat.label}
+                  className="glass group relative overflow-hidden rounded-2xl px-4 py-5 text-center transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500/15 text-brand-300 transition-transform duration-300 group-hover:scale-110">
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </div>
+                  <div className="relative text-2xl font-extrabold text-gradient sm:text-3xl">
+                    {stat.value}
+                  </div>
+                  <div className="relative mt-1 text-xs font-medium uppercase tracking-wider text-text-secondary">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wider text-text-secondary">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -14,6 +14,9 @@ import {
   Wifi,
   Gauge,
   Database,
+  Layers,
+  Infinity as InfinityIcon,
+  Heart,
 } from 'lucide-react';
 import { Package } from '@/types';
 import PaymentModal from './PaymentModal';
@@ -209,33 +212,35 @@ export default function PlanCard({ pkg, isInCompareList = false, onToggleCompare
         </div>
 
         {/* Features list */}
-        <ul className="relative mt-5 flex-1 space-y-2">
+        <ul className="relative mt-5 flex-1 space-y-2.5">
           <li className="flex items-center gap-2.5 text-sm text-text-primary">
-            <span className="flex h-5 w-5 flex-none items-center justify-center rounded-md bg-brand-500/15 text-brand-300">
-              <Database className="h-3 w-3" strokeWidth={2.2} />
+            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-brand-500/15 text-brand-300 ring-1 ring-brand-400/20">
+              <Database className="h-3.5 w-3.5" strokeWidth={2.2} />
             </span>
             <span className="truncate font-medium">{pkg.data} Data</span>
           </li>
           <li className="flex items-center gap-2.5 text-sm text-text-primary">
-            <span className="flex h-5 w-5 flex-none items-center justify-center rounded-md bg-accent/15 text-accent-400">
-              <Gauge className="h-3 w-3" strokeWidth={2.2} />
+            <span className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-accent/15 text-accent-400 ring-1 ring-accent/30">
+              <Gauge className="h-3.5 w-3.5" strokeWidth={2.2} />
             </span>
             <span className="truncate font-medium">Tốc độ {pkg.speed}</span>
           </li>
           {pkg.hotspot && (
             <li className="flex items-center gap-2.5 text-sm text-text-primary">
-              <span className="flex h-5 w-5 flex-none items-center justify-center rounded-md bg-emerald-500/15 text-emerald-300">
-                <Wifi className="h-3 w-3" strokeWidth={2.2} />
+              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-400/30">
+                <Wifi className="h-3.5 w-3.5" strokeWidth={2.2} />
               </span>
               <span className="truncate font-medium">Phát WiFi</span>
             </li>
           )}
           {pkg.features.slice(0, 3).map((feature, idx) => (
             <li key={idx} className="flex items-start gap-2.5 text-sm text-text-secondary">
-              <CheckCircle2
-                className="mt-0.5 h-3.5 w-3.5 flex-none text-emerald-400"
-                strokeWidth={2.2}
-              />
+              <span className="mt-0.5 flex h-4 w-4 flex-none items-center justify-center">
+                <CheckCircle2
+                  className="h-4 w-4 text-emerald-400"
+                  strokeWidth={2.4}
+                />
+              </span>
               <span className="line-clamp-1">{feature}</span>
             </li>
           ))}

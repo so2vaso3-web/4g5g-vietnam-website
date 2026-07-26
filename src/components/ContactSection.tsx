@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Mailbox } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
 function MessengerIcon({ className }: { className?: string }) {
@@ -167,7 +167,7 @@ export default function ContactSection() {
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <span className="section-eyebrow">
-              <MessengerIcon className="h-3.5 w-3.5" />
+              <MessageCircle className="h-3.5 w-3.5" strokeWidth={2.2} />
               Kết nối với chúng tôi
             </span>
             <h2 className="section-title mt-5">
@@ -187,9 +187,9 @@ export default function ContactSection() {
               const body = (
                 <>
                   <div
-                    className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl ring-1 ${c.bg} transition-transform duration-300 group-hover:scale-110`}
+                    className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ring-1 ${c.bg} transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow-blue`}
                   >
-                    <Icon className={`h-5 w-5 ${c.color}`} strokeWidth={1.8} />
+                    <Icon className={`h-6 w-6 ${c.color}`} strokeWidth={2} />
                   </div>
                   <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-text-secondary">
                     {c.label}

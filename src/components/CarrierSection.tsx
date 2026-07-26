@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Signal } from 'lucide-react';
+import { Signal, TowerControl, Radio, Waves, Antenna } from 'lucide-react';
 import Reveal from './ui/Reveal';
 
 const CARRIERS = [
@@ -130,7 +130,7 @@ export default function CarrierSection() {
 
                 <div className="relative">
                   <div
-                    className={`mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-bg-base/60 transition-transform duration-300 group-hover:scale-110 sm:h-16 sm:w-16`}
+                    className={`mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-bg-base/60 transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow-blue sm:h-16 sm:w-16`}
                   >
                     {carrierLogos[carrier.key] ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -143,7 +143,7 @@ export default function CarrierSection() {
                     ) : (
                       <Signal
                         className={`h-6 w-6 ${carrier.text} sm:h-7 sm:w-7`}
-                        strokeWidth={1.6}
+                        strokeWidth={2}
                       />
                     )}
                   </div>

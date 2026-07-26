@@ -88,13 +88,17 @@ export default function TestimonialsSection() {
 
               <div className="relative">
                 {/* Stars */}
-                <div className="mb-6 flex justify-center gap-1">
+                <div className="mb-6 flex justify-center gap-1.5">
                   {Array.from({ length: current.rating }).map((_, i) => (
-                    <Star
+                    <span
                       key={i}
-                      className="h-5 w-5 fill-amber-400 text-amber-400 sm:h-6 sm:w-6"
-                      strokeWidth={1.6}
-                    />
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500/15 text-amber-400 ring-1 ring-amber-400/30 sm:h-10 sm:w-10"
+                    >
+                      <Star
+                        className="h-4 w-4 fill-amber-400 text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.5)] sm:h-5 sm:w-5"
+                        strokeWidth={2}
+                      />
+                    </span>
                   ))}
                 </div>
 
@@ -106,8 +110,11 @@ export default function TestimonialsSection() {
                 {/* Author */}
                 <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-brand text-base font-bold text-white shadow-glow-blue sm:h-14 sm:w-14">
+                    <div className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-brand text-base font-bold text-white shadow-glow-blue ring-2 ring-brand-400/30 sm:h-14 sm:w-14">
                       {current.initials}
+                      <span className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-bg-base">
+                        <BadgeCheck className="h-2.5 w-2.5 text-white" strokeWidth={3} />
+                      </span>
                     </div>
                     <div>
                       <div className="text-sm font-bold text-text-primary sm:text-base">
