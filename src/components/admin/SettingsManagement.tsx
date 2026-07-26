@@ -11,7 +11,6 @@ export default function SettingsManagement() {
     autoApproveOrders: false,
     emailNotifications: false,
     ordersPerPage: 10,
-    facebook: 'https://www.facebook.com/HOTRODATA/',
     carrierLogos: {},
     paymentLogos: {},
     paymentQRCodes: {},
@@ -424,13 +423,13 @@ export default function SettingsManagement() {
                 />
               </div>
               <div>
-                <label className="block mb-2 font-semibold">Facebook / Messenger</label>
+                <label className="block mb-2 font-semibold">Facebook</label>
                 <input
                   type="text"
                   value={settings.facebook || ''}
                   onChange={(e) => setSettings({ ...settings, facebook: e.target.value })}
                   className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white"
-                  placeholder="https://m.me/tenpage hoặc link Facebook"
+                  placeholder="Link Facebook"
                 />
               </div>
             </div>

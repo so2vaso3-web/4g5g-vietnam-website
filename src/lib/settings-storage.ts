@@ -102,7 +102,6 @@ export async function readSettingsFromKV(decrypt: boolean = true): Promise<any> 
     paypalEnabled: false,
     cryptoEnabled: false,
     websiteName: 'Mạng Việt Nam',
-    facebook: 'https://www.facebook.com/HOTRODATA/',
     paypalMode: 'sandbox',
     cryptoGateway: 'manual',
   };

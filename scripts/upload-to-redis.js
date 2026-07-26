@@ -81,7 +81,6 @@ async function uploadToRedis() {
             autoApproveOrders: false,
             emailNotifications: false,
             ordersPerPage: 10,
-            facebook: 'https://www.facebook.com/HOTRODATA/',
             carrierLogos: {},
             paymentLogos: {},
             paymentQRCodes: {},
