@@ -1,0 +1,82 @@
+[
+  {
+    "id": "msg-1783860270104-02fjztfwd",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "eeee",
+    "timestamp": "2026-07-12T12:44:30.104Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860271688-zd59jv0q8",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "eeee",
+    "timestamp": "2026-07-12T12:44:31.688Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860272984-kda0c3u95",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "eee",
+    "timestamp": "2026-07-12T12:44:32.984Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860274014-rq5mo63rt",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "eee",
+    "timestamp": "2026-07-12T12:44:34.014Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860275030-jcjb9v0yn",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "eee",
+    "timestamp": "2026-07-12T12:44:35.030Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860275822-yk1z8dcwl",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "ee",
+    "timestamp": "2026-07-12T12:44:35.822Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860277102-ai4kzq7te",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "ee",
+    "timestamp": "2026-07-12T12:44:37.102Z",
+    "isAdmin": false,
+    "read": false
+  },
+  {
+    "id": "msg-1783860279612-5najem1ga",
+    "visitorId": "visitor-1783859691735-5icyj9lp3",
+    "name": "Bạn",
+    "email": "",
+    "message": "ee",
+    "timestamp": "2026-07-12T12:44:39.612Z",
+    "isAdmin": false,
+    "read": false
+  }
+]
